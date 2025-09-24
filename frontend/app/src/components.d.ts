@@ -17,7 +17,6 @@ declare module 'vue' {
     CreateLessonModal: typeof import('./components/CreateLessonModal.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./components/icons/IconCommunity.vue')['default']
     IconDocumentation: typeof import('./components/icons/IconDocumentation.vue')['default']
     IconEcosystem: typeof import('./components/icons/IconEcosystem.vue')['default']
@@ -27,15 +26,11 @@ declare module 'vue' {
     LessonModal: typeof import('./components/LessonModal.vue')['default']
     LoginLayout: typeof import('./components/layouts/LoginLayout.vue')['default']
     Logo: typeof import('./components/ui/Logo.vue')['default']
-    Mainlayout: typeof import('./components/layouts/mainlayout.vue')['default']
     MainLayout: typeof import('./components/layouts/MainLayout.vue')['default']
-    MainPage: typeof import('./components/layouts/mainPage.vue')['default']
     Modal: typeof import('./components/Modal.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchCourses: typeof import('./components/Index/SearchCourses.vue')['default']
     Teachers: typeof import('./components/Index/Teachers.vue')['default']
-    TheWelcome: typeof import('./components/TheWelcome.vue')['default']
-    WelcomeItem: typeof import('./components/WelcomeItem.vue')['default']
   }
 }

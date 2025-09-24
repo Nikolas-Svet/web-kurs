@@ -1,6 +1,6 @@
 // src/components/CreateLessonModal.vue
 <template>
-  <Modal v-if="visible" @close="onClose">
+  <Modal v-if="props.visible" @close="onClose">
     <template #header>Создать урок</template>
     <template #body>
       <form class="form" @submit.prevent="onCreate">
@@ -45,7 +45,10 @@ import { coursesApi } from '@/api/courses'
 import type {ILesson} from "@/types/lesson.ts";
 
 const props = defineProps<{ visible: boolean }>()
-const emit = defineEmits<{ create: (lesson: ILesson) => void; close: () => void }>()
+const emit = defineEmits<{
+  (e: 'create', lesson: ILesson): void
+  (e: 'close'): void
+}>()
 
 const form = ref<LessonPayload>({ title: '', content: '', videoUrl: '', course: '', order: 0 })
 const courses = ref<ICourse[]>([])
@@ -59,7 +62,7 @@ function onClose() { emit('close') }
 
 async function onCreate() {
   const res = await lessonsApi.createLesson(form.value)
-  if (res.success) emit('create', res.data)
+  if (res.success && res.data) emit('create', res.data)
 }
 </script>
 

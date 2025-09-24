@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { userApi, UserProfile } from '@/api/user'
+import { userApi } from '@/api/user'
+import type { UserProfile } from '@/api/user'
 import defaultAvatar from '@/assets/images/user.svg'
 import {Base} from "@/utils/consts.ts";
 

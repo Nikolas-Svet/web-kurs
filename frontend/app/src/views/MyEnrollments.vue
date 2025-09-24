@@ -69,7 +69,7 @@ const showDetail = ref(false)
 
 async function loadData() {
   const res = await enrollmentsApi.getEnrollments()
-  if (res.success) {
+  if (res.success && res.data) {
     enrollments.value = res.data
     // загрузить данные о курсах
     await Promise.all(
@@ -89,7 +89,7 @@ async function openEnrollment(en: IEnrollment) {
   selectedEnrollment.value = en
   // загрузить уроки
   const lRes = await lessonsApi.getLessons()
-  if (lRes.success) {
+  if (lRes.success && lRes.data) {
     selectedCourseLessons.value = lRes.data.filter(
       (l) => l.course === en.course
     )
@@ -111,7 +111,7 @@ async function toggleLesson(lessonId: string) {
     selectedEnrollment.value = res.data
     // обновить список
     const i = enrollments.value.findIndex((x) => x._id === en._id)
-    if (i !== -1) enrollments.value[i] = res.data
+    if (i !== -1 && res.data) enrollments.value[i] = res.data
   }
 }
 </script>

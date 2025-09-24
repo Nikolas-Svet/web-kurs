@@ -56,12 +56,12 @@ function openEdit(course: ICourse) {
   showEdit.value = true
 }
 
-async function onUpdate(updated: ICourse) {
+async function onUpdate() {
   showEdit.value = false
   await load()
 }
 
-async function onCreate(newCourse: ICourse) {
+async function onCreate() {
   showCreate.value = false
   await load()
 }

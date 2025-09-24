@@ -17,7 +17,7 @@ const emit = defineEmits(['update:modelValue']);
     :options="props.options"
     :modelValue="props.modelValue"
     :placeholder="props.placeholder || 'Выберите значение'"
-    @update:modelValue="value => emit('update:modelValue', value)"
+    @update:modelValue="(value: any) => emit('update:modelValue', value)"
     clearable
   />
 </template>

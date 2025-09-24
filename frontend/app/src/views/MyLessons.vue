@@ -52,7 +52,7 @@ async function loadData() {
     lessonsApi.getLessons(),
     coursesApi.getCoursesMy()
   ])
-  if (lRes.success) lessons.value = lRes.data
+  if (lRes.success && lRes.data) lessons.value = lRes.data
   if (cRes.success) courses.value = Array.isArray(cRes.data.data) ? cRes.data.data : cRes.data
 }
 

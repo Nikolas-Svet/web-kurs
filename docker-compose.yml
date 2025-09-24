@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  frontend:
+    build:
+      context: ./frontend/app
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    env_file:
+      - .env
+    ports:
+      - "8081:8080"
+    depends_on:
+      - public-api-gateway
+    networks:
+      - backend
   public-api-gateway:
     image: nginx:latest
     container_name: public-api-gateway
@@ -16,12 +30,12 @@ services:
     ports:
       - "3000:80"
     volumes:
-      - ./services/public-api-gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./backend/services/public-api-gateway/nginx.conf:/etc/nginx/nginx.conf:ro
     networks:
       - backend
   user-service:
     build:
-      context: .
+      context: backend
       dockerfile: services/user-service/Dockerfile
     env_file:
       - .env
@@ -33,7 +47,7 @@ services:
       - backend
   auth-service:
     build:
-      context: .
+      context: backend
       dockerfile: services/auth-service/Dockerfile
     env_file:
       - .env
@@ -45,7 +59,7 @@ services:
       - backend
   courses-service:
     build:
-      context: .
+      context: backend
       dockerfile: services/courses-service/Dockerfile
     env_file:
       - .env
@@ -59,7 +73,7 @@ services:
       - backend
   lesson-service:
     build:
-      context: .
+      context: backend
       dockerfile: services/lesson-service/Dockerfile
     env_file:
       - .env
@@ -71,7 +85,7 @@ services:
       - backend
   comment-service:
     build:
-      context: .
+      context: backend
       dockerfile: services/comment-service/Dockerfile
     env_file:
       - .env
@@ -83,7 +97,7 @@ services:
       - backend
   enrollment-service:
     build:
-      context: .
+      context: backend
       dockerfile: services/enrollment-service/Dockerfile
     env_file:
       - .env

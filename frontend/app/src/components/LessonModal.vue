@@ -46,7 +46,10 @@ import { coursesApi } from '@/api/courses'
 import type {ILesson} from "@/types/lesson.ts";
 
 const props = defineProps<{ visible: boolean; lesson: ILesson | null }>()
-const emit = defineEmits<{ save: (lesson: ILesson) => void; close: () => void }>()
+const emit = defineEmits<{
+  (e: 'save', lesson: ILesson): void
+  (e: 'close'): void
+}>()
 
 // Формируем поля формы
 const form = ref<LessonPayload>({ title: '', content: '', videoUrl: '', course: '', order: 0 })
@@ -78,7 +81,7 @@ async function onSave() {
   if (!props.lesson) return
   const payload: Partial<LessonPayload> = { ...form.value }
   const res = await lessonsApi.updateLesson(props.lesson._id, payload)
-  if (res.success) emit('save', res.data)
+  if (res.success && res.data) emit('save', res.data)
 }
 
 async function onDelete() {

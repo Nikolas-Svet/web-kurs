@@ -60,7 +60,11 @@ import { coursesApi } from '@/api/courses'
 import type { ICourse } from '@/types/course'
 
 const props = defineProps<{ visible: boolean; course: ICourse | null }>()
-const emit = defineEmits<{ save: (course: ICourse) => any; close: () => any }>()
+const emit = defineEmits<{
+  (e: 'save', course: ICourse): void
+  (e: 'close'): void
+}>()
+
 
 const form = ref<CoursePayload>({
   title: '',

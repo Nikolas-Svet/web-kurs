@@ -18,7 +18,10 @@
 
 <script setup lang="ts">
 import { defineEmits } from 'vue'
-const emit = defineEmits<{ close: () => void }>()
+const emit = defineEmits<{
+  (e: 'close'): void
+}>()
+
 function close() {
   emit('close')
 }

@@ -1,6 +1,6 @@
 // src/components/CreateCourseModal.vue
 <template>
-  <Modal v-if="visible" @close="onClose">
+  <Modal v-if="props.visible" @close="onClose">
     <template #header>Добавить курс</template>
     <template #body>
       <form class="form" @submit.prevent="onCreate">
@@ -59,7 +59,11 @@ import type { CoursePayload } from '@/types/courses'
 import type { ICourse } from '@/types/course.ts'
 
 const props = defineProps<{ visible: boolean }>()
-const emit = defineEmits<{ create: (course: ICourse) => void; close: () => void }>()
+
+const emit = defineEmits<{
+  (e: 'create', course: ICourse): void
+  (e: 'close'): void
+}>()
 
 const form = ref<CoursePayload>({
   title: '',

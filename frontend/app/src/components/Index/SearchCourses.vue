@@ -15,10 +15,10 @@
         />
       </div>
       <div class="SearchCourses__item">
-        <BaseInput v-model.number="filter.priceMin" placeholder="Мин. цена" type="number" />
+        <BaseInput v-model="filter.priceMin" placeholder="Мин. цена" type="number" />
       </div>
       <div class="SearchCourses__item">
-        <BaseInput v-model.number="filter.priceMax" placeholder="Макс. цена" type="number" />
+        <BaseInput v-model="filter.priceMax" placeholder="Макс. цена" type="number" />
       </div>
     </div>
 
@@ -87,11 +87,18 @@ import { userApi } from '@/api/user.ts'
 import {Base} from "@/utils/consts.ts";
 
 const backendBase = import.meta.env.VITE_API_URL
-const filter = reactive({
+type Filter = {
+  title: string
+  category: string
+  priceMin?: number
+  priceMax?: number
+  page: number
+  limit: number
+}
+
+const filter = reactive<Filter>({
   title: '',
   category: '',
-  priceMin: null as number | null,
-  priceMax: null as number | null,
   page: 1,
   limit: 3,
 })
@@ -142,7 +149,7 @@ async function openCourse(course: ICourse) {
   detailCourse.value = course
   // Загрузить уроки по курсу
   const res = await lessonsApi.getLessons()
-  if (res.success) {
+  if (res.success && res.data) {
     lessons.value = res.data.filter((l) => l.course === course._id)
   }
   showDetail.value = true
